@@ -1,0 +1,415 @@
+# Translation of Plugins - Checkout Field Editor (Checkout Manager) for WooCommerce - Development (trunk) in Persian
+# This file is distributed under the same license as the Plugins - Checkout Field Editor (Checkout Manager) for WooCommerce - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2022-10-31 19:26:20+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/4.0.0-beta.2\n"
+"Language: fa\n"
+"Project-Id-Version: Plugins - Checkout Field Editor (Checkout Manager) for WooCommerce - Development (trunk)\n"
+
+#: admin/class-thwcfd-admin-form-field.php:59
+msgid "Paragraph"
+msgstr "پاراگراف"
+
+#: admin/class-thwcfd-admin-form-field.php:57
+msgid "Week"
+msgstr "هفته"
+
+#: admin/class-thwcfd-admin-form-field.php:56
+msgid "Month"
+msgstr "ماه"
+
+#: admin/class-thwcfd-admin-form-field.php:55
+msgid "Time"
+msgstr "زمان"
+
+#: admin/class-thwcfd-admin-form-field.php:54
+msgid "Date"
+msgstr "تاریخ"
+
+#: admin/class-thwcfd-admin-form-field.php:58
+#: admin/class-thwcfd-admin-form-field.php:72
+msgid "URL"
+msgstr "آدرس (URL)"
+
+#: public/class-thwcfd-public-checkout.php:443
+msgid "<strong>%s</strong> is not a valid url."
+msgstr "<strong>%s</strong> آدرس معتبری نیست."
+
+#: public/class-thwcfd-public-checkout.php:658
+msgid "required"
+msgstr "ضروری"
+
+#: admin/class-thwcfd-admin-form-field.php:50
+msgid "Checkbox"
+msgstr "چک باکس"
+
+#: admin/class-thwcfd-admin-form-field.php:42
+msgid "Hidden"
+msgstr "مخفی"
+
+#: admin/class-thwcfd-admin-form-field.php:49
+msgid "Multiselect"
+msgstr "چند انتخابی"
+
+#: public/class-thwcfd-public-checkout.php:660
+msgid "optional"
+msgstr "اختیاری"
+
+#: admin/class-thwcfd-admin.php:307
+msgid "Yes, today"
+msgstr "بله، امروز"
+
+#: admin/class-thwcfd-admin.php:319
+msgid "Nah, Never"
+msgstr "نه، هرگز"
+
+#: admin/class-thwcfd-admin.php:303
+msgid "We heard you!"
+msgstr "ما صدای شما را شنیدیم"
+
+#: admin/class-thwcfd-admin-form-field.php:51
+msgid "Checkbox Group"
+msgstr "گروه چک باکس"
+
+#: admin/class-thwcfd-admin.php:315
+msgid "Maybe later"
+msgstr "شاید بعداً"
+
+#: admin/class-thwcfd-admin-form-field.php:105
+msgid " Checked by default"
+msgstr " فعال به‌صورت پیش‌فرض"
+
+#: admin/class-thwcfd-admin-settings-themehigh-plugins.php:246
+msgid "Activate"
+msgstr "فعال سازی"
+
+#: admin/class-thwcfd-admin-settings-themehigh-plugins.php:233
+msgid "Activated"
+msgstr "فعال شد"
+
+#: admin/class-thwcfd-admin-settings-themehigh-plugins.php:184
+msgid "Other Plugins"
+msgstr "افزونه‌های دیگر"
+
+#: admin/class-thwcfd-admin-settings-general.php:39
+msgid "Additional Fields"
+msgstr "فیلدهای اضافی"
+
+#: admin/class-thwcfd-admin-settings-general.php:38
+msgid "Shipping Fields"
+msgstr "فیلدهای حمل و نقل"
+
+#: admin/class-thwcfd-admin-settings-themehigh-plugins.php:267
+msgid "Install now"
+msgstr "همین حالا نصب کنید"
+
+#: admin/class-thwcfd-admin-settings-general.php:37
+msgid "Billing Fields"
+msgstr "فیلدهای صورتحساب"
+
+#: admin/class-thwcfd-admin-settings-general.php:34
+#: admin/class-thwcfd-admin-settings.php:27
+msgid "Other Free Plugins"
+msgstr "افزونه‌های رایگان دیگر"
+
+#: admin/class-thwcfd-admin-settings-general.php:33
+#: admin/class-thwcfd-admin-settings.php:26
+msgid "Premium Features"
+msgstr "امکانات نسخه پولی"
+
+#: admin/class-thwcfd-admin-form-field.php:686
+#: admin/assets/js/thwcfd-admin.js:927
+msgid "Add new option"
+msgstr "افزودن گزینه جدید"
+
+#: admin/class-thwcfd-admin-form-field.php:686
+#: admin/assets/js/thwcfd-admin.js:928
+msgid "Remove option"
+msgstr "حذف گزینه"
+
+#: admin/class-thwcfd-admin-form-field.php:192
+msgid "Back"
+msgstr "قبلی"
+
+#: admin/class-thwcfd-admin-form-field.php:189
+msgid "Next"
+msgstr "بعدی"
+
+#: admin/class-thwcfd-admin-form-field.php:186
+msgid "Save & Close"
+msgstr "ذخیره و بستن"
+
+#: admin/class-thwcfd-admin-form-field.php:154
+msgid "Basic Info"
+msgstr "اطلاعات پایه"
+
+#: admin/class-thwcfd-admin-form-field.php:151
+msgid "Save Field"
+msgstr "ذخیره فیلد"
+
+#: admin/class-thwcfd-admin-form-field.php:99
+msgid "Validation"
+msgstr "اعتبارسنجی"
+
+#: admin/class-thwcfd-admin-form-field.php:95
+msgid "Default Value"
+msgstr "مقدار پیش فرض"
+
+#: admin/class-thwcfd-admin-form-field.php:76
+msgid "Full width"
+msgstr "تمام عرض"
+
+#: admin/class-thwcfd-admin-form-field.php:41
+#: admin/class-thwcfd-admin-form-field.php:71
+msgid "Number"
+msgstr "شماره"
+
+#: admin/class-thwcfd-admin-form-field.php:220
+msgid "Display Settings"
+msgstr "تنظیمات نمایش"
+
+#: admin/class-thwcfd-admin-settings-advanced.php:99
+msgid "Settings successfully reset."
+msgstr "تنظیمات با موفقیت بازنشانی شد."
+
+#: admin/class-thwcfd-admin-settings-themehigh-plugins.php:146
+msgid "Compatible Plugins"
+msgstr "افزونه های سازگار"
+
+#: admin/class-thwcfd-admin-settings-general.php:75
+msgid "Checkout fields successfully reset"
+msgstr "فیلدهای پرداخت با موفقیت بازنشانی شدند"
+
+#: admin/class-thwcfd-admin-settings-general.php:32
+#: admin/class-thwcfd-admin-settings.php:25
+msgid "Advanced Settings"
+msgstr "تنظیمات پیشرفته"
+
+#: admin/class-thwcfd-admin-settings-general.php:110
+msgid "Are you sure you want to reset to default fields? all your changes will be deleted."
+msgstr "آیا اطمینان دارید می خواهید به فیلدهای پیش فرض برگردید؟ همه تغییراتی که اعمال کردید حذف خواهند شد."
+
+#: admin/class-thwcfd-admin-form-field.php:206
+msgid "Basic Details"
+msgstr "جزئیات پایه"
+
+#: admin/class-thwcfd-admin-form-field.php:683
+#: admin/assets/js/thwcfd-admin.js:924
+msgid "Option Value"
+msgstr "مقدار گزینه"
+
+#: admin/class-thwcfd-admin-form-field.php:684
+#: admin/assets/js/thwcfd-admin.js:925
+msgid "Option Text"
+msgstr "متن گزینه"
+
+#: public/class-thwcfd-public-checkout.php:439
+msgid "<strong>%s</strong> is not a valid number."
+msgstr "<strong>%s</strong> عدد معتبری نیست."
+
+#: admin/class-thwcfd-admin-form-field.php:78
+msgid "Half width right"
+msgstr "نیمۀ سمت راست"
+
+#: admin/class-thwcfd-admin-form-field.php:77
+msgid "Half width left"
+msgstr "نیمۀ سمت چپ"
+
+#: admin/class-thwcfd-admin.php:69
+msgid "Get Pro"
+msgstr "نسخه پیشرفته"
+
+#: admin/class-thwcfd-admin.php:56
+msgid "WooCommerce Checkout Field Editor"
+msgstr "ویرایش فرم پرداخت ووکامرس"
+
+#. Author of the plugin
+msgid "ThemeHigh"
+msgstr "ThemeHigh"
+
+#: admin/class-thwcfd-admin-settings-general.php:261
+#: admin/class-thwcfd-admin-settings-general.php:323
+msgid "Your changes were not saved due to an error."
+msgstr "تغییرات شما به دلیل خطا ذخیره نشده است."
+
+#: admin/class-thwcfd-admin-form-field.php:47
+msgid "Radio"
+msgstr "رادیویی"
+
+#: admin/class-thwcfd-admin-form-field.php:43
+msgid "Password"
+msgstr "گذرواژه"
+
+#: admin/class-thwcfd-admin-settings-general.php:276
+msgid "Your changes were not saved due to no fields found."
+msgstr "تغییرات شما به دلیل این‌که هیچ فیلدی یافت نشد، ذخیره نشده است."
+
+#: admin/class-thwcfd-admin-form-field.php:46
+msgid "Textarea"
+msgstr "ناحیۀ متنی"
+
+#: admin/class-thwcfd-admin-form-field.php:104
+#: admin/class-thwcfd-admin-settings-general.php:93
+msgid "Required"
+msgstr "ضروری"
+
+#: admin/class-thwcfd-admin-form-field.php:45
+#: admin/class-thwcfd-admin-form-field.php:68
+msgid "Phone"
+msgstr "تلفن"
+
+#: admin/class-thwcfd-admin-form-field.php:94
+#: admin/class-thwcfd-admin-settings-general.php:90
+msgid "Label"
+msgstr "برچسب"
+
+#: admin/class-thwcfd-admin-form-field.php:93
+#: admin/class-thwcfd-admin-settings-general.php:88
+msgid "Name"
+msgstr "نام"
+
+#: admin/class-thwcfd-admin-form-field.php:91
+#: admin/class-thwcfd-admin-settings-general.php:89
+msgid "Type"
+msgstr "نوع"
+
+#: admin/class-thwcfd-admin-form-field.php:48
+msgid "Select"
+msgstr "انتخاب"
+
+#: admin/class-thwcfd-admin-form-field.php:40
+msgid "Text"
+msgstr "متن"
+
+#: admin/class-thwcfd-admin-form-field.php:107
+#: admin/class-thwcfd-admin-settings-general.php:94
+msgid "Enabled"
+msgstr "فعال"
+
+#: admin/class-thwcfd-admin-settings-general.php:92
+msgid "Validations"
+msgstr "اعتبارسنجی‌ها"
+
+#: admin/class-thwcfd-admin-form-field.php:675
+msgid "Options"
+msgstr "امکانات و تنظیمات"
+
+#: admin/class-thwcfd-admin-form-field.php:96
+#: admin/class-thwcfd-admin-settings-general.php:91
+msgid "Placeholder"
+msgstr "نگهدارنده"
+
+#: admin/class-thwcfd-admin-form-field.php:44
+#: admin/class-thwcfd-admin-form-field.php:67
+msgid "Email"
+msgstr "رایانامه"
+
+#: admin/class-thwcfd-admin-settings-general.php:31
+#: admin/class-thwcfd-admin-settings.php:24
+msgid "Checkout Fields"
+msgstr "فیلدهای فرم پرداخت"
+
+#: admin/class-thwcfd-admin-form-field.php:69
+msgid "Postcode"
+msgstr "کدپستی"
+
+#: admin/class-thwcfd-admin-form-field.php:70
+msgid "State"
+msgstr "استان"
+
+#: admin/class-thwcfd-admin-form-field.php:98
+msgid "Class"
+msgstr "کلاس"
+
+#: admin/class-thwcfd-admin-form-field.php:99
+msgid "Select validations"
+msgstr "انتخاب اعتبارسنجی ها"
+
+#: admin/class-thwcfd-admin-form-field.php:109
+msgid "Display in Emails"
+msgstr "نمایش در ایمیل ها"
+
+#: admin/class-thwcfd-admin-form-field.php:110
+msgid "Display in Order Detail Pages"
+msgstr "نمایش به ترتیب جزئیات صفحات"
+
+#: admin/class-thwcfd-admin.php:56
+msgid "Checkout Form"
+msgstr "فرم پرداخت"
+
+#. Plugin Name of the plugin
+msgid "Checkout Field Editor for WooCommerce"
+msgstr "ویرایشگر فرم پرداخت برای ووکامرس"
+
+#: admin/class-thwcfd-admin-settings-general.php:95
+#: admin/class-thwcfd-admin-settings-general.php:191
+msgid "Edit"
+msgstr "ویرایش"
+
+#: admin/class-thwcfd-admin-settings-general.php:108
+msgid "Save changes"
+msgstr "ذخیره تغییرات"
+
+#: includes/utils/class-thwcfd-utils.php:154
+msgid "Order Notes"
+msgstr "یادداشت های سفارش"
+
+#: admin/class-thwcfd-admin.php:67
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: admin/class-thwcfd-admin.php:61
+msgid "WooCommerce"
+msgstr "ووکامرس"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://www.themehigh.com"
+msgstr "https://www.themehigh.com"
+
+#: admin/class-thwcfd-admin-settings-advanced.php:137
+#: admin/class-thwcfd-admin-settings-advanced.php:292
+#: admin/class-thwcfd-admin-settings-general.php:258
+#: admin/class-thwcfd-admin-settings-general.php:320
+msgid "Your changes were not saved due to an error (or you made none!)."
+msgstr "تغییرات شما به دلیل بروز خطا (یا چون شما هیچ‌یک را انجام نداده‌اید) ذخیره نشده است."
+
+#: admin/class-thwcfd-admin-settings-advanced.php:135
+#: admin/class-thwcfd-admin-settings-general.php:256
+#: admin/class-thwcfd-admin-settings-general.php:318
+msgid "Your changes were saved."
+msgstr "تغییرات شما ذخیره شد."
+
+#: admin/class-thwcfd-admin-settings-general.php:109
+msgid "Reset to default fields"
+msgstr "بازگرداندن فیلدهای پیش‌فرض"
+
+#: admin/class-thwcfd-admin-settings-general.php:103
+msgid "Remove"
+msgstr "حذف"
+
+#: admin/class-thwcfd-admin-settings-general.php:102
+msgid "Add field"
+msgstr "افزودن فیلد"
+
+#: includes/utils/class-thwcfd-utils.php:155
+msgctxt "placeholder"
+msgid "Notes about your order, e.g. special notes for delivery."
+msgstr "توضیحاتی در مورد سفارشتان بنویسید، مثلاً نکتۀ خاصی در مورد تحویل سفارش."
+
+#. Description of the plugin
+msgid "Customize WooCommerce checkout fields(Add, Edit, Delete and re-arrange fields)."
+msgstr "فیلدهای صورتحساب ووکامرس را سفارشی‌سازی کنید (افزودن، ویرایش، حذف و جابجایی)."
+
+#: admin/class-thwcfd-admin-settings-general.php:104
+msgid "Enable"
+msgstr "فعال‌سازی"
+
+#: admin/class-thwcfd-admin-settings-general.php:105
+msgid "Disable"
+msgstr "غیرفعال‌سازی"
