@@ -44,6 +44,8 @@ services:
       MYSQL_ROOT_PASSWORD: 
     volumes:
       - ./woodentoys.sql:/docker-entrypoint-initdb.d/woodentoys.sql
+    networks:
+      - my_network
 
   woodentoys:
     depends_on:
