@@ -60,7 +60,7 @@ services:
       - WORDPRESS_DB_PASSWORD=
       - WORDPRESS_DB_NAME=woodentoys
     volumes:
-      - wordpress:/var/www/html
+      - wodentoys:/var/www/html
       - ./woodentoy.conf:/etc/nginx/conf.d/woodentoy.conf
     networks:
       - my_network
