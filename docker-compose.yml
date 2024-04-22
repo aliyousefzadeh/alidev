@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     env_file: .env
     volumes:
-      - ./woodentoys.sql:/docker-entrypoint-initdb.d/woodentoys.sql
+      - ./woodentoys.sql:/docker-entrypoint-initdb.d
     networks:
       - my_network
 
