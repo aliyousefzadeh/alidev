@@ -5,14 +5,13 @@ services:
     container_name: webserver
     restart: unless-stopped
     ports:
-      - "8081:80"
-      - "8082:80"
-      - "8083:80"
+      - 80:80
     volumes:
+      - ./alidev.conf:/etc/nginx/conf.d/alidev.conf
+      - ./artinmusik.conf:/etc/nginx/conf.d/artin.conf
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./alidev:/usr/share/nginx/html/alidev
-      - ./artinmusik:/usr/share/nginx/html/artinmusik
-      - ./woodentoys:/usr/share/nginx/html/woodentoys
+      - ./artinmusik:/usr/share/nginx/html/artin
     networks:
       - my_network
 
@@ -29,11 +28,13 @@ services:
     networks:
       - my_network
 
-  woodentoys_wordpress:
+  woodentoys:
     depends_on:
       - db
     image: wordpress:latest
     container_name: wordpress
+    ports:
+      - 8081:80
     restart: unless-stopped
     env_file: .env
     environment:
@@ -42,7 +43,7 @@ services:
       - WORDPRESS_DB_PASSWORD=
       - WORDPRESS_DB_NAME=woodentoys
     volumes:
-      - ./woodentoys:/var/www/html
+      - ./woodentoys:/var/www/html/woodentoys
       - ./woodentoy.conf:/etc/nginx/conf.d/woodentoy.conf
     networks:
       - my_network
