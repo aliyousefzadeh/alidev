@@ -11,6 +11,8 @@ services:
       - 8082:80
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - my_network
   
   alidev:
     image: nginx:latest
@@ -19,6 +21,8 @@ services:
     volumes:
       - ./alidev:/usr/share/nginx/html
       - ./alidev.conf:/etc/nginx/conf.d/alidev.conf
+    networks:
+      - my_network
 
   artinmusik:
     image: nginx:latest
@@ -27,6 +31,8 @@ services:
     volumes:
       - ./artinmusik:/usr/share/nginx/html
       - ./artinmusik.conf:/etc/nginx/conf.d/artin.conf
+    networks:
+      - my_network
 
   db:
     image: mysql:5.7
@@ -38,6 +44,8 @@ services:
       MYSQL_ROOT_PASSWORD: 
     volumes:
       - ./woodentoys.sql:/docker-entrypoint-initdb.d/woodentoys.sql
+    networks:
+      - my_network
 
   woodentoys:
     depends_on:
@@ -56,3 +64,8 @@ services:
     volumes:
       - ./woodentoys:/var/www/html
       - ./woodentoy.conf:/etc/nginx/conf.d/woodentoy.conf
+    networks:
+      - my_network
+
+networks:
+  my_network:
