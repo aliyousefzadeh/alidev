@@ -22,8 +22,9 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      MYSQL_DATABASE: woodentoys
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: "woodentoys"
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - ./woodentoys.sql:/docker-entrypoint-initdb.d/woodentoys.sql
     networks:
@@ -41,7 +42,7 @@ services:
     environment:
       - WORDPRESS_DB_HOST=db
       - WORDPRESS_DB_USER=root
-      - WORDPRESS_DB_PASSWORD=
+      - WORDPRESS_DB_PASSWORD=password
       - WORDPRESS_DB_NAME=woodentoys
     volumes:
       - ./woodentoys:/var/www/html/woodentoys
