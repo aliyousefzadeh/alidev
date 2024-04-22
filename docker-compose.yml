@@ -23,7 +23,7 @@ services:
     env_file: .env
     environment:
       MYSQL_DATABASE: woodentoys
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: password
     volumes:
       - ./woodentoys.sql:/docker-entrypoint-initdb.d/woodentoys.sql
     networks:
