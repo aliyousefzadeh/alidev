@@ -24,9 +24,11 @@ services:
     container_name: db
     restart: unless-stopped
     ports:
-      - "3306:30306"
+      - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: p@ssword
+      MYSQL_USER: user_woodentoys
+      MYSQL_PASSWORD: 1qaz!QAZ
       MYSQL_DATABASE: woodentoys
     volumes:
       - ./backup:/docker-entrypoint-initdb.d
@@ -43,8 +45,8 @@ services:
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: username_woodentoys
-      WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_DB_USER: user_woodentoys
+      WORDPRESS_DB_PASSWORD: 1qaz!QAZ
       WORDPRESS_DB_NAME: woodentoys
     volumes:
       - ./woodentoys:/var/www/html/woodentoys
