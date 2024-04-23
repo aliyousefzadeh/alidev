@@ -25,7 +25,9 @@ services:
     restart: unless-stopped
     ports:
       - "3306:3306"
-    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: woodentoys
     volumes:
       - ./data:/var/lib/mysql
       - ./backup:/docker-entrypoint-initdb.d
