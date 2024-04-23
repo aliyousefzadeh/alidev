@@ -41,7 +41,11 @@ services:
     ports:
       - 80:80
     restart: unless-stopped
-    env_file: .env
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_DB_NAME: woodentoys
     volumes:
       - ./woodentoys:/var/www/html/woodentoys
       - ./woodentoy.conf:/etc/nginx/conf.d/woodentoy.conf
