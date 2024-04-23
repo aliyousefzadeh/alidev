@@ -23,10 +23,10 @@
 define( 'DB_NAME', 'woodentoys' );
 
 /** Database username */
-define( 'DB_USER', 'user' );
+define( 'DB_USER', 'user_woodentoys' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'password' );
+define( 'DB_PASSWORD', '1qaz!QAZ' );
 
 /** Database hostname */
 define( 'DB_HOST', 'db' );
