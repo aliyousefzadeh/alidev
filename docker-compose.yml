@@ -28,8 +28,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: woodentoys
-    volumes:
-      - ./data:/var/lib/mysql
+    # volumes:
+    #   - ./data:/var/lib/mysql
     networks:
       - my_network
 
