@@ -20,12 +20,15 @@ services:
       - my_network
 
   db:
-    image: mysql:5.7
+    image: mariadb:10.4
     container_name: db
     restart: unless-stopped
+    ports:
+      - "3306:3306"
     env_file: .env
     volumes:
-      - ./woodentoys.sql:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/mysql
+      - ./backup:/docker-entrypoint-initdb.d
     networks:
       - my_network
 
