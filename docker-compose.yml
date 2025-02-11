@@ -10,12 +10,12 @@ services:
       - ./alidev.conf:/etc/nginx/conf.d/alidev.conf
       - ./artinmusik.conf:/etc/nginx/conf.d/artin.conf
       - ./ai.conf:/etc/nginx/conf.d/ai.conf
-      - ./ai.conf:/etc/nginx/conf.d/artindevmarket.conf
+      - ./artindevmarket.conf:/etc/nginx/conf.d/artindevmarket.conf
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./alidev:/usr/share/nginx/html/alidev
       - ./artinmusik:/usr/share/nginx/html/artin
       - ./ai:/usr/share/nginx/html/ai
-      - ./ai:/usr/share/nginx/html/artindevmarket
+      - ./artindevmarket:/usr/share/nginx/html/artindevmarket
     networks:
       - my_network
 
