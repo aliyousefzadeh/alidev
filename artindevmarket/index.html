@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtInDevMarket - Nurturing Artistic Innovation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        nav {
+            background: #2c3e50;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/random/1920x1080/?art');
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .investment-plans {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .plan-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .plan {
+            background: #f9f9f9;
+            padding: 2rem;
+            margin: 1rem;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .portfolio {
+            padding: 4rem 2rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .about-section {
+            padding: 4rem 2rem;
+            background: #ecf0f1;
+        }
+
+        .timeline {
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .timeline-item {
+            padding: 1rem;
+            border-left: 2px solid #3498db;
+            margin-left: 1rem;
+            position: relative;
+        }
+
+        .contact-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#plans">Plans</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div>
+            <h1>Discover Hidden Artistic Treasures</h1>
+            <p>Investing in tomorrow's masterpieces today</p>
+            <button>Explore Artists</button>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <h2>Our Story</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>2022 - Foundation</h3>
+                <p>Founded by art enthusiasts to bridge the gap between unknown artists and global markets</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2023 - First Exhibition</h3>
+                <p>Successfully showcased 50 artists across 3 continents</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2024 - Global Partnerships</h3>
+                <p>Established partnerships with major galleries in Paris, New York, and Tokyo</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="investment-plans" id="plans">
+        <h2>Investment Plans</h2>
+        <div class="plan-container">
+            <div class="plan">
+                <h3>Emerging Artist</h3>
+                <p>$5,000 - $15,000</p>
+                <ul>
+                    <li>Basic Marketing Package</li>
+                    <li>Online Showcase</li>
+                    <li>Social Media Promotion</li>
+                </ul>
+                <button>Invest Now</button>
+            </div>
+            <div class="plan">
+                <h3>Premium Talent</h3>
+                <p>$20,000 - $50,000</p>
+                <ul>
+                    <li>Gallery Exhibitions</li>
+                    <li>International Marketing</li>
+                    <li>Production Support</li>
+                </ul>
+                <button>Invest Now</button>
+            </div>
+            <div class="plan">
+                <h3>Masterpiece Collection</h3>
+                <p>$75,000+</p>
+                <ul>
+                    <li>Global Tour Exhibition</li>
+                    <li>Premium Marketing</li>
+                    <li>Dedicated Agent</li>
+                </ul>
+                <button>Invest Now</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <h2>Featured Works</h2>
+        <div class="gallery">
+            <img src="https://source.unsplash.com/random/301x300/?painting" alt="Contemporary Painting">
+            <img src="https://source.unsplash.com/random/302x300/?sculpture" alt="Modern Sculpture">
+            <img src="https://source.unsplash.com/random/303x300/?short-film" alt="Film Production">
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-form">
+            <form>
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea rows="5" placeholder="Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>ArtInDevMarket © 2024 | New York • Paris • Tokyo</p>
+        <p>contact@artindevmarket.com | +1 (555) 123-4567</p>
+        <p>Follow us: [Social Media Icons]</p>
+    </footer>
+</body>
+</html>
