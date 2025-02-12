@@ -16,6 +16,8 @@ services:
       - ./artinmusik:/usr/share/nginx/html/artin
       - ./ai:/usr/share/nginx/html/ai
       - ./artindevmarket:/usr/share/nginx/html/artindevmarket
+    depends_on:
+      - woodentoys
     networks:
       - my_network
 
@@ -34,8 +36,6 @@ services:
       - my_network
 
   woodentoys:
-    depends_on:
-      - db
     image: wordpress:latest
     container_name: wordpress
     restart: unless-stopped
@@ -46,7 +46,8 @@ services:
       WORDPRESS_DB_NAME: woodentoys
     volumes:
       - ./woodentoys:/var/www/html/woodentoys
-      - ./woodentoy.conf:/etc/nginx/conf.d/woodentoy.conf
+    depends_on:
+      - db
     networks:
       - my_network
 
