@@ -38,8 +38,6 @@ services:
       - db
     image: wordpress:latest
     container_name: wordpress
-    ports:
-      - 81:81
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: db
