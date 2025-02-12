@@ -11,11 +11,13 @@ services:
       - ./artinmusik.conf:/etc/nginx/conf.d/artin.conf
       - ./ai.conf:/etc/nginx/conf.d/ai.conf
       - ./artindevmarket.conf:/etc/nginx/conf.d/artindevmarket.conf
+      - ./woodentoy.conf:/etc/nginx/conf.d/woodentoys.conf
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./alidev:/usr/share/nginx/html/alidev
       - ./artinmusik:/usr/share/nginx/html/artin
       - ./ai:/usr/share/nginx/html/ai
       - ./artindevmarket:/usr/share/nginx/html/artindevmarket
+      
     depends_on:
       - woodentoys
     networks:
