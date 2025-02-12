@@ -17,7 +17,6 @@ services:
       - ./artinmusik:/usr/share/nginx/html/artin
       - ./ai:/usr/share/nginx/html/ai
       - ./artindevmarket:/usr/share/nginx/html/artindevmarket
-      
     depends_on:
       - woodentoys
     networks:
