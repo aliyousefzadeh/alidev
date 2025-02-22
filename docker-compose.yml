@@ -39,7 +39,7 @@ services:
       - my_network
 
   woodentoys:
-    image: wordpress:fpm
+    image: wordpress:php7.4-fpm
     container_name: wordpress
     restart: unless-stopped
     environment:
