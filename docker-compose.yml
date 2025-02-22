@@ -39,7 +39,7 @@ services:
       - my_network
 
   woodentoys:
-    image: wordpress:latest
+    image: wordpress:fpm
     container_name: wordpress
     restart: unless-stopped
     environment:
@@ -48,7 +48,7 @@ services:
       WORDPRESS_DB_PASSWORD: 1qaz!QAZ
       WORDPRESS_DB_NAME: woodentoys
     volumes:
-      - wordpress_data:/var/www/html
+      - wordpress_data:/var/www/html/woodentoys
       - ./woodentoys:/var/www/html/woodentoys
     depends_on:
       - db
