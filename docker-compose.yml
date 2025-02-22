@@ -33,7 +33,7 @@ services:
       MYSQL_PASSWORD: 1qaz!QAZ
       MYSQL_DATABASE: woodentoys
     volumes:
-      - db_data:/var/lib/mysql
+      - ./backup:/var/lib/mysql
       - ./backup:/docker-entrypoint-initdb.d
     networks:
       - my_network
@@ -48,7 +48,6 @@ services:
       WORDPRESS_DB_PASSWORD: 1qaz!QAZ
       WORDPRESS_DB_NAME: woodentoys
     volumes:
-      - wordpress_data:/var/www/html/woodentoys
       - ./woodentoys:/var/www/html/woodentoys
     depends_on:
       - db
