@@ -81,15 +81,15 @@ $table_prefix = 'wp_woodentoys';
  */
 define( 'WP_DEBUG', true );
 
-/* Add any custom values between this line and the "stop editing" line. */
-// Force WordPress to recognize HTTPS when behind a reverse proxy (CDN)
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
-    $_SERVER['HTTPS'] = 'on';
-}
+// /* Add any custom values between this line and the "stop editing" line. */
+// // Force WordPress to recognize HTTPS when behind a reverse proxy (CDN)
+// if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+//     $_SERVER['HTTPS'] = 'on';
+// }
 
-// Set Site URL and Home URL to HTTPS
-define('WP_HOME', 'https://woodentoys.artindevmarket.com');
-define('WP_SITEURL', 'https://woodentoys.artindevmarket.com');
+// // Set Site URL and Home URL to HTTPS
+// define('WP_HOME', 'https://woodentoys.artindevmarket.com');
+// define('WP_SITEURL', 'https://woodentoys.artindevmarket.com');
 
 
 /* That's all, stop editing! Happy publishing. */
