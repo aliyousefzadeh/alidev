@@ -17,7 +17,7 @@ services:
       - ./artinmusik:/usr/share/nginx/html/artin
       - ./ai:/usr/share/nginx/html/ai
       - ./artindevmarket:/usr/share/nginx/html/artindevmarket
-      - ./woodentoys:/var/www/html/woodentoys
+      - wp-data:/var/www/html/woodentoys
     depends_on:
       - woodentoys
     networks:
@@ -33,8 +33,7 @@ services:
       MYSQL_PASSWORD: 1qaz!QAZ
       MYSQL_DATABASE: woodentoys
     volumes:
-      - ./backup:/var/lib/mysql
-      - ./backup:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/mysql
     networks:
       - my_network
 
@@ -48,11 +47,15 @@ services:
       WORDPRESS_DB_PASSWORD: 1qaz!QAZ
       WORDPRESS_DB_NAME: woodentoys
     volumes:
-      - ./woodentoys:/var/www/html/woodentoys
+      - wp-data:/var/www/html/woodentoys
     depends_on:
       - db
     networks:
       - my_network
+
+volumes:
+  db-data:
+  wp-data:
 
 networks:
   my_network:
