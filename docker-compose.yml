@@ -33,6 +33,11 @@ services:
       MYSQL_DATABASE: woodentoys
     volumes:
       - ./backup:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p1qaz!QAZ"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
       - my_network
 
@@ -48,7 +53,8 @@ services:
     volumes:
       - ./woodentoys:/var/www/html
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - my_network
 
