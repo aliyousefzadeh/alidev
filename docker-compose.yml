@@ -25,6 +25,7 @@ services:
   db:
     image: mariadb:10.4
     container_name: db
+    platform: linux/arm64
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: 1qaz!QAZ
@@ -43,6 +44,7 @@ services:
 
   woodentoys:
     image: wordpress:php7.4-fpm
+    platform: linux/arm64
     container_name: wordpress
     restart: unless-stopped
     environment:
