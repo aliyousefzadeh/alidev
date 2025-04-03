@@ -47,8 +47,6 @@ services:
     platform: linux/arm64
     container_name: wordpress
     restart: unless-stopped
-    ports:
-      - 9000:9000
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: user_woodentoys
