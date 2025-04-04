@@ -79,7 +79,6 @@ $table_prefix = 'wp_woodentoys';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', true );
 define('WP_DEBUG', false);
 define('WP_DEBUG_LOG', true);
 define('WP_DEBUG_DISPLAY', false);
@@ -94,8 +93,8 @@ define('WP_DEBUG_DISPLAY', false);
 // }
 
 // // Set Site URL and Home URL to HTTPS
-// define('WP_HOME', 'https://woodentoys.artindevmarket.com');
-// define('WP_SITEURL', 'https://woodentoys.artindevmarket.com');
+define('WP_HOME', 'http://woodentoys.artindevmarket.com');
+define('WP_SITEURL', 'http://woodentoys.artindevmarket.com');
 
 
 /* That's all, stop editing! Happy publishing. */
