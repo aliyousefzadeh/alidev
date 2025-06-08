@@ -20,6 +20,7 @@ services:
       - ./woodentoys:/usr/share/nginx/html/woodentoys
     depends_on:
       - woodentoys
+      - n8n
     networks:
       - my_network
 
@@ -60,6 +61,23 @@ services:
         condition: service_healthy
     networks:
       - my_network
+n8n:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: n8n
+    restart: unless-stopped
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=yourStrongPasswordHere
+      - N8N_SECURE_COOKIE=false
+      - WEBHOOK_URL=http://n8n.artindevmarket.com/
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - my_network
+
+volumes:
+  n8n_data:
 
 networks:
   my_network:
