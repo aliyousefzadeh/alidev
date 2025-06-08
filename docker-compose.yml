@@ -8,6 +8,7 @@ services:
       - 80:80
     volumes:
       - ./alidev.conf:/etc/nginx/conf.d/alidev.conf
+      - ./n8n.conf:/etc/nginx/conf.d/n8n.conf
       - ./artinmusik.conf:/etc/nginx/conf.d/artin.conf
       - ./ai.conf:/etc/nginx/conf.d/ai.conf
       - ./artindevmarket.conf:/etc/nginx/conf.d/artindevmarket.conf
