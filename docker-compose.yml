@@ -70,7 +70,7 @@ services:
       - N8N_BASIC_AUTH_USER=admin
       - N8N_BASIC_AUTH_PASSWORD=Artin@9799
       - N8N_SECURE_COOKIE=false
-      - WEBHOOK_URL=http://n8n.artindevmarket.com/
+      - WEBHOOK_URL=https://n8n.artindevmarket.com/
     volumes:
       - n8n_data:/home/node/.n8n
     networks:
