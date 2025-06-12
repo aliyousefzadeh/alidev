@@ -22,7 +22,7 @@ services:
     depends_on:
       - woodentoys
       - n8n
-      - n8nnew
+      - n8new
     networks:
       - my_network
 
