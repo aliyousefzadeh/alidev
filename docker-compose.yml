@@ -80,7 +80,7 @@ services:
     networks:
       - my_network
   
-    n8new:
+  n8new:
     image: docker.n8n.io/n8nio/n8n
     container_name: n8new
     restart: unless-stopped
