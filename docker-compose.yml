@@ -9,6 +9,7 @@ services:
     volumes:
       - ./alidev.conf:/etc/nginx/conf.d/alidev.conf
       - ./n8n.conf:/etc/nginx/conf.d/n8n.conf
+      - ./n8new.conf:/etc/nginx/conf.d/n8new.conf
       - ./artinmusik.conf:/etc/nginx/conf.d/artin.conf
       - ./ai.conf:/etc/nginx/conf.d/ai.conf
       - ./artindevmarket.conf:/etc/nginx/conf.d/artindevmarket.conf
@@ -21,6 +22,7 @@ services:
     depends_on:
       - woodentoys
       - n8n
+      - n8nnew
     networks:
       - my_network
 
@@ -65,6 +67,8 @@ services:
     image: docker.n8n.io/n8nio/n8n
     container_name: n8n
     restart: unless-stopped
+    ports:
+      - 5678:5678
     environment:
       - N8N_BASIC_AUTH_ACTIVE=true
       - N8N_BASIC_AUTH_USER=admin
@@ -75,9 +79,27 @@ services:
       - n8n_data:/home/node/.n8n
     networks:
       - my_network
+  
+    n8new:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: n8new
+    restart: unless-stopped
+    ports:
+      - 5679:5678
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=1qaz!QAZ
+      - N8N_SECURE_COOKIE=false
+      - WEBHOOK_URL=https://n8new.artindevmarket.com/
+    volumes:
+      - n8new_data:/home/node/.n8n
+    networks:
+      - my_network
 
 volumes:
   n8n_data:
+  n8new_data:
 
 networks:
   my_network:
