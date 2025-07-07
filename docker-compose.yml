@@ -80,6 +80,15 @@ services:
     networks:
       - my_network
   
+  horoscope-telegram-bot:
+    build: ./horoscope-telegram-bot
+    container_name: horoscope-telegram_bot
+    restart: unless-stopped
+    env_file:
+      - ./horoscope-telegram-bot/bot/.env
+    networks:
+      - my_network
+
   n8new:
     image: docker.n8n.io/n8nio/n8n
     container_name: n8new
