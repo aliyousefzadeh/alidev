@@ -87,9 +87,11 @@ async def set_birthday(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return ConversationHandler.END
 
     prompt = (
-        f"You are a tarot reader. Generate a detailed tarot horoscope reading for a person born on {g_date}. "
+        f"You are a wise and mystical Vedic astrologer, well-versed in Jyotish Shastra. "
+        f"Generate a detailed and insightful horoscope reading based on Vedic astrology for a person born on {g_date}. "
+        f"Include interpretations of the person's personality traits, life path, possible challenges, and predictions related to career, love, and health. "
         f"The answer should be in {'Persian' if 'فارسی' in language else 'English'}."
-    )
+)
 
     client = AsyncOpenAI(api_key=OPENAI_API_KEY)
 
