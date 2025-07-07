@@ -138,7 +138,6 @@ def main():
         states={
             LANGUAGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_language)],
             BIRTHDAY: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_birthday)],
-            CALENDAR: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_calendar)],
         },
         fallbacks=[CommandHandler("cancel", cancel)]
     )
