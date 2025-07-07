@@ -16,7 +16,7 @@ from telegram.ext import (
 logging.basicConfig(level=logging.INFO)
 
 # Constants for conversation
-LANGUAGE, BIRTHDAY, CALENDAR = range(3)
+LANGUAGE, BIRTHDAY = range(2)
 
 # Set your keys
 # TELEGRAM_BOT_TOKEN = "7551425761:AAGfprr4rnAycm0eX0Ws_5uctac8EurCIqE"
