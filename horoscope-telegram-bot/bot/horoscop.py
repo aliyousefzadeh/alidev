@@ -25,6 +25,11 @@ LANGUAGE, BIRTHDAY = range(2)
 load_dotenv()
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+PROVIDER = os.getenv("PROVIDER", "openai").lower()
+
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
 
 if not TELEGRAM_BOT_TOKEN or not OPENAI_API_KEY:
     raise RuntimeError("Missing TELEGRAM_BOT_TOKEN or OPENAI_API_KEY in .env file")
@@ -93,38 +98,29 @@ async def set_birthday(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"The answer should be in {'Persian' if 'فارسی' in language else 'English'}."
 )
 
-    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
-
-    try:
+    # client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+    # === Use OpenAI ===
+    if PROVIDER == "openai":
+        client = AsyncOpenAI(api_key=OPENAI_API_KEY)
         response = await client.chat.completions.create(
             model="gpt-4",
             messages=[{"role": "user", "content": prompt}]
         )
-        horoscope = response.choices[0].message.content
-        await update.message.reply_text(horoscope)
-    except Exception as e:
-        logging.error(f"OpenAI error: {e}")
-        await update.message.reply_text("An error occurred while generating the horoscope.")
+        reply_text = response.choices[0].message.content
 
+    # === Use Gemini ===
+    elif PROVIDER == "gemini":
+        model = genai.GenerativeModel("gemini-pro")
+        response = model.generate_content(prompt)
+        reply_text = response.text
+    
+    else:
+        reply_text = "Invalid AI provider configuration."
+    
+    
+    await update.message.reply_text(reply_text)
     return ConversationHandler.END
 
-    # Generate horoscope via AI
-    prompt = (
-        f"You are a tarot reader. Generate a detailed tarot horoscope reading for a person born on {g_date}. "
-        f"The answer should be in {'Persian' if 'فارسی' in language else 'English'}."
-    )
-
-    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
-
-    response = await client.chat.completions.create(
-        model="gpt-4",
-        messages=[{"role": "user", "content": prompt}]
-    )
-
-    horoscope = response.choices[0].message.content
-
-    await update.message.reply_text(horoscope)
-    return ConversationHandler.END
 
 # Cancel
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
