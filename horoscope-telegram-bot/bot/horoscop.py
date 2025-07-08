@@ -110,8 +110,8 @@ async def set_birthday(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # === Use Gemini ===
     elif PROVIDER == "gemini":
-        model = genai.GenerativeModel("gemini-pro")
-        response = model.generate_content(prompt)
+        model = genai.GenerativeModel("models/gemini-pro")
+        response = await model.generate_content_async(prompt)
         reply_text = response.text
     
     else:
