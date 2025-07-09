@@ -59,7 +59,7 @@ async def set_language(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Handle birthday input
 async def set_birthday(update: Update, context: ContextTypes.DEFAULT_TYPE):
     birthday_str = update.message.text.strip()
-    language = context.user_data["language"]
+    language = context.user_data.get("language", "english") ## context.user_data["language"]
 
     try:
         year, month, day = map(int, birthday_str.split("-"))
@@ -68,7 +68,7 @@ async def set_birthday(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text("فرمت تاریخ اشتباه است. لطفاً به صورت YYYY-MM-DD وارد کنید.")
         else:
             await update.message.reply_text("Invalid date format. Please use YYYY-MM-DD.")
-        return ConversationHandler.END
+        return BIRTHDAY ##return ConversationHandler.END
 
     # Detect calendar type
     try:
@@ -96,30 +96,71 @@ async def set_birthday(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"Generate a detailed and insightful horoscope reading based on Vedic astrology for a person born on {g_date}. "
         f"Include interpretations of the person's personality traits, life path, possible challenges, and predictions related to career, love, and health. "
         f"The answer should be in {'Persian' if 'فارسی' in language else 'English'}."
-)
+    )
+
+    reply_text = "ShivaGod Generating your horoscope... Please wait."
+    if "فارسی" in language:
+        reply_text = "شیوا در حال آماده سازی طالع بینی شما... لطفا صبر کنید."
+    
+    # Send a waiting message to the user
+    await update.message.reply_text(reply_text)
 
     # client = AsyncOpenAI(api_key=OPENAI_API_KEY)
-    # === Use OpenAI ===
-    if PROVIDER == "openai":
-        client = AsyncOpenAI(api_key=OPENAI_API_KEY)
-        response = await client.chat.completions.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": prompt}]
-        )
-        reply_text = response.choices[0].message.content
+    
+    try:
+        # === Use OpenAI ===
+        if PROVIDER == "openai":
+            client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+            response = await client.chat.completions.create(
+                model="gpt-4",
+                messages=[{"role": "user", "content": prompt}]
+            )
+            horoscope_text = response.choices[0].message.content
 
-    # === Use Gemini ===
-    elif PROVIDER == "gemini":
-        model = genai.GenerativeModel('gemini-2.5-flash')
-        response = model.generate_content(prompt)
-        reply_text = response.text
-    
-    else:
-        reply_text = "Invalid AI provider configuration."
-    
-    
-    await update.message.reply_text(reply_text)
+        # === Use Gemini ===
+        elif PROVIDER == "gemini":
+            # 1. Use a valid model name like 'gemini-pro' or 'gemini-1.5-flash-latest'
+            model = genai.GenerativeModel('gemini-pro')
+            # 2. Use the asynchronous method 'generate_content_async' with 'await'
+            response = await model.generate_content_async(prompt)
+            horoscope_text = response.text
+        
+        else:
+            horoscope_text = "Invalid AI provider configuration."
+        
+        await update.message.reply_text(horoscope_text)
+
+    except Exception as e:
+        logging.error(f"AI provider error: {e}")
+        error_message = "Sorry, something went wrong while generating the horoscope. Please try again later."
+        if "فارسی" in language:
+            error_message = "متاسفانه مشکلی در تولید طالع بینی پیش آمد. لطفا بعدا دوباره تلاش کنید."
+        await update.message.reply_text(error_message)
+
     return ConversationHandler.END
+
+
+    # # === Use OpenAI ===
+    # if PROVIDER == "openai":
+    #     client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+    #     response = await client.chat.completions.create(
+    #         model="gpt-4",
+    #         messages=[{"role": "user", "content": prompt}]
+    #     )
+    #     reply_text = response.choices[0].message.content
+
+    # # === Use Gemini ===
+    # elif PROVIDER == "gemini":
+    #     model = genai.GenerativeModel('gemini-pro')
+    #     response = await model.generate_content(prompt)
+    #     reply_text = response.text
+    
+    # else:
+    #     reply_text = "Invalid AI provider configuration."
+    
+    
+    # await update.message.reply_text(reply_text)
+    # return ConversationHandler.END
 
 
 # Cancel
