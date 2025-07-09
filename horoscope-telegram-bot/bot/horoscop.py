@@ -120,7 +120,7 @@ async def set_birthday(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # === Use Gemini ===
         elif PROVIDER == "gemini":
             # 1. Use a valid model name like 'gemini-pro' or 'gemini-1.5-flash-latest'
-            model = genai.GenerativeModel('gemini-1.5-flash')
+            model = genai.GenerativeModel('gemini-1.5-flash-latest')
             # 2. Use the asynchronous method 'generate_content_async' with 'await'
             response = await model.generate_content_async(prompt)
             horoscope_text = response.text
