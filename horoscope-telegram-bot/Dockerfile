@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY bot/ /app/
 
-CMD ["python", "horoscop.py"]
+CMD ["python", "telegram_bot.py"]
