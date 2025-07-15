@@ -17,6 +17,8 @@ logging.basicConfig(level=logging.INFO)
 
 # Constants for conversation
 LANGUAGE, BIRTHDAY = range(2)
+TELEGRAM_MAX_MESSAGE_LENGTH = 4096
+
 
 # Set your keys
 # TELEGRAM_BOT_TOKEN = "7551425761:AAGfprr4rnAycm0eX0Ws_5uctac8EurCIqE"
@@ -108,6 +110,8 @@ async def set_birthday(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # client = AsyncOpenAI(api_key=OPENAI_API_KEY)
     
     try:
+        horoscope_text = ""
+
         # === Use OpenAI ===
         if PROVIDER == "openai":
             client = AsyncOpenAI(api_key=OPENAI_API_KEY)
@@ -128,7 +132,19 @@ async def set_birthday(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             horoscope_text = "Invalid AI provider configuration."
         
-        await update.message.reply_text(horoscope_text)
+        # === FIX: Split the long message into chunks and send them one by one ===
+        if horoscope_text:
+            for i in range(0, len(horoscope_text), TELEGRAM_MAX_MESSAGE_LENGTH):
+                chunk = horoscope_text[i:i + TELEGRAM_MAX_MESSAGE_LENGTH]
+                await update.message.reply_text(chunk)
+        else:
+            # Handle cases where the AI might return an empty response
+            error_message = "Could not generate a horoscope. The AI returned an empty response."
+            if "فارسی" in language:
+                error_message = "طالع بینی تولید نشد. پاسخی از سرویس هوش مصنوعی دریافت نگردید."
+            await update.message.reply_text(error_message)
+        
+        # await update.message.reply_text(horoscope_text)
 
     except Exception as e:
         logging.error(f"AI provider error: {e}")
