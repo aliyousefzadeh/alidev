@@ -1,22 +1,34 @@
+import os
 import asyncio
 import logging
+from dotenv import load_dotenv
 from datetime import datetime
-from aiogram import Bot, Dispatcher, types, F
+from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+from horoscope_generator import generate_horoscope
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
 # Bot token - replace with your actual bot token
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+# TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+
+load_dotenv()
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+PROVIDER = os.getenv("PROVIDER", "openai").lower()
+
+# --- Constants ---
+TELEGRAM_MAX_MESSAGE_LENGTH = 4096
 
 # Initialize bot and dispatcher
-bot = Bot(token=BOT_TOKEN)
+bot = Bot(token=TELEGRAM_BOT_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
 
@@ -31,13 +43,7 @@ LANGUAGES = {
     "en": "🇺🇸 English",
     "es": "🇪🇸 Español", 
     "fr": "🇫🇷 Français",
-    "de": "🇩🇪 Deutsch",
-    "it": "🇮🇹 Italiano",
-    "pt": "🇧🇷 Português",
-    "ru": "🇷🇺 Русский",
-    "zh": "🇨🇳 中文",
-    "ja": "🇯🇵 日本語",
-    "ko": "🇰🇷 한국어"
+    "fa": "🇮🇷 Persian"
 }
 
 # Language-specific messages
@@ -51,6 +57,16 @@ MESSAGES = {
         "invalid_date": "❌ Invalid date format. Please use YYYY-MM-DD format:",
         "registration_complete": "🎉 Registration complete!\n\n📋 Your information:\n🌍 Language: English\n🏙️ City of birth: {}\n📅 Date of birth: {}",
         "invalid_date_value": "❌ Invalid date. Please enter a valid date in YYYY-MM-DD format:"
+    },
+    "fa": {
+        "welcome": "👋 به ربات خوش آمدید! لطفاً زبان مورد نظر خود را انتخاب کنید:",
+        "language_selected": "✅ زبان به فارسی تنظیم شد. اکنون، لطفاً شهر محل تولد خود را وارد کنید:",
+        "enter_city": "🏙️ لطفاً شهر محل تولد خود را وارد کنید:",
+        "city_received": "✅ شهر دریافت شد: {}. اکنون، لطفاً تاریخ تولد خود را (سال-ماه-روز) وارد کنید:",
+        "enter_birth_date": "📅 لطفاً تاریخ تولد خود را با فرمت سال-ماه-روز وارد کنید:",
+        "invalid_date": "❌ فرمت تاریخ نامعتبر است. لطفاً از فرمت سال-ماه-روز استفاده کنید:",
+        "registration_complete": "🎉 ثبت نام کامل شد!\n\n📋 اطلاعات شما:\n🌍 زبان: فارسی\n🏙️ شهر محل تولد: {}\n📅 تاریخ تولد: {}",
+        "invalid_date_value": "❌ تاریخ نامعتبر است. لطفاً یک تاریخ معتبر با فرمت سال-ماه-روز وارد کنید:"
     },
     "es": {
         "welcome": "👋 ¡Bienvenido! Por favor, selecciona tu idioma preferido:",
@@ -94,6 +110,33 @@ def create_language_keyboard() -> InlineKeyboardMarkup:
         builder.row(*row_buttons)
     
     return builder.as_markup()
+# --- NEW HELPER FUNCTION TO SEND LONG MESSAGES ---
+async def send_long_message(message: types.Message, text: str):
+    """Splits and sends a long message."""
+    if len(text) <= TELEGRAM_MAX_MESSAGE_LENGTH:
+        await message.answer(text)
+    else:
+        parts = []
+        while len(text) > 0:
+            if len(text) > TELEGRAM_MAX_MESSAGE_LENGTH:
+                part = text[:TELEGRAM_MAX_MESSAGE_LENGTH]
+                # Try to split at the last newline character
+                last_newline = part.rfind('\n')
+                if last_newline != -1:
+                    parts.append(part[:last_newline])
+                    text = text[last_newline+1:]
+                else:
+                    # If no newline, just split by length
+                    parts.append(part)
+                    text = text[TELEGRAM_MAX_MESSAGE_LENGTH:]
+            else:
+                parts.append(text)
+                break
+
+        for part in parts:
+            if part.strip(): # Avoid sending empty messages
+                await message.answer(part)
+                await asyncio.sleep(0.5) # Small delay between messages
 
 @dp.message(CommandStart())
 async def start_command(message: types.Message, state: FSMContext):
@@ -165,15 +208,15 @@ async def birth_date_received(message: types.Message, state: FSMContext):
         
         # Get all collected data
         data = await state.get_data()
-        city = data.get("city")
+        city = data.get("city", "Unknown") # Get city from state
         language_name = LANGUAGES.get(lang_code, "English")
         
         # Send completion message
-        completion_message = get_message(lang_code, "registration_complete").format(city, date_text)
-        await message.answer(completion_message)
+        # completion_message = get_message(lang_code, "registration_complete").format(city, date_text)
+        # await message.answer(completion_message)
         
-        # Clear state
-        await state.clear()
+        # # Clear state
+        # await state.clear()
         
         # Log the registration (in production, save to database)
         logging.info(f"User {message.from_user.id} registered: Language={lang_code}, City={city}, Birth Date={date_text}")
