@@ -6,6 +6,6 @@ COPY bot/requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY bot/ /app/
+COPY . .
 
 CMD ["python", "telegram_bot.py"]
