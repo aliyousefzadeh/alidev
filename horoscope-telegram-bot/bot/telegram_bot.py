@@ -3,7 +3,7 @@ import asyncio
 import logging
 from dotenv import load_dotenv
 from datetime import datetime
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -56,17 +56,21 @@ MESSAGES = {
         "enter_birth_date": "📅 Please enter your date of birth in format YYYY-MM-DD:",
         "invalid_date": "❌ Invalid date format. Please use YYYY-MM-DD format:",
         "registration_complete": "🎉 Registration complete!\n\n📋 Your information:\n🌍 Language: English\n🏙️ City of birth: {}\n📅 Date of birth: {}",
-        "invalid_date_value": "❌ Invalid date. Please enter a valid date in YYYY-MM-DD format:"
+        "invalid_date_value": "❌ Invalid date. Please enter a valid date in YYYY-MM-DD format:",
+        "generating": "⏳ Generating your personal horoscope... This may take a moment.",
+        "generation_failed": "❌ Sorry, an error occurred while generating your horoscope. Please try again later."
     },
     "fa": {
         "welcome": "👋 به ربات خوش آمدید! لطفاً زبان مورد نظر خود را انتخاب کنید:",
         "language_selected": "✅ زبان به فارسی تنظیم شد. اکنون، لطفاً شهر محل تولد خود را وارد کنید:",
         "enter_city": "🏙️ لطفاً شهر محل تولد خود را وارد کنید:",
-        "city_received": "✅ شهر دریافت شد: {}. اکنون، لطفاً تاریخ تولد خود را (سال-ماه-روز) وارد کنید:",
+        "city_received": "✅ شهر دریافت شد: {}. اکنون، لطفاً تاریخ تولد خود  به میلادی را  بصورت YYYY-MM-DD وارد کنید::",
         "enter_birth_date": "📅 لطفاً تاریخ تولد خود را با فرمت سال-ماه-روز وارد کنید:",
         "invalid_date": "❌ فرمت تاریخ نامعتبر است. لطفاً از فرمت سال-ماه-روز استفاده کنید:",
         "registration_complete": "🎉 ثبت نام کامل شد!\n\n📋 اطلاعات شما:\n🌍 زبان: فارسی\n🏙️ شهر محل تولد: {}\n📅 تاریخ تولد: {}",
-        "invalid_date_value": "❌ تاریخ نامعتبر است. لطفاً یک تاریخ معتبر با فرمت سال-ماه-روز وارد کنید:"
+        "invalid_date_value": "❌ تاریخ نامعتبر است. لطفاً یک تاریخ معتبر با فرمت سال-ماه-روز وارد کنید:",
+        "generating": "⏳ در حال تولید طالع بینی شخصی شما... این ممکن است کمی طول بکشد.",
+        "generation_failed": "❌ متأسفانه هنگام تولید طالع بینی خطایی روی داد. لطفاً بعداً دوباره امتحان کنید."
     },
     "es": {
         "welcome": "👋 ¡Bienvenido! Por favor, selecciona tu idioma preferido:",
@@ -76,7 +80,9 @@ MESSAGES = {
         "enter_birth_date": "📅 Por favor ingresa tu fecha de nacimiento en formato YYYY-MM-DD:",
         "invalid_date": "❌ Formato de fecha inválido. Por favor usa el formato YYYY-MM-DD:",
         "registration_complete": "🎉 ¡Registro completo!\n\n📋 Tu información:\n🌍 Idioma: Español\n🏙️ Ciudad de nacimiento: {}\n📅 Fecha de nacimiento: {}",
-        "invalid_date_value": "❌ Fecha inválida. Por favor ingresa una fecha válida en formato YYYY-MM-DD:"
+        "invalid_date_value": "❌ Fecha inválida. Por favor ingresa una fecha válida en formato YYYY-MM-DD:",
+        "generating": "⏳ Generando tu horóscopo personal... Esto puede tardar un momento.",
+        "generation_failed": "❌ Lo sentimos, ocurrió un error al generar tu horóscopo. Por favor, inténtalo de nuevo más tarde."
     },
     "fr": {
         "welcome": "👋 Bienvenue ! Veuillez sélectionner votre langue préférée :",
@@ -86,7 +92,9 @@ MESSAGES = {
         "enter_birth_date": "📅 Veuillez entrer votre date de naissance au format YYYY-MM-DD :",
         "invalid_date": "❌ Format de date invalide. Veuillez utiliser le format YYYY-MM-DD :",
         "registration_complete": "🎉 Inscription terminée !\n\n📋 Vos informations :\n🌍 Langue : Français\n🏙️ Ville de naissance : {}\n📅 Date de naissance : {}",
-        "invalid_date_value": "❌ Date invalide. Veuillez entrer une date valide au format YYYY-MM-DD :"
+        "invalid_date_value": "❌ Date invalide. Veuillez entrer une date valide au format YYYY-MM-DD :",
+        "generating": "⏳ Génération de votre horoscope personnel en cours... Cela peut prendre un moment.",
+        "generation_failed": "❌ Désolé, une erreur est survenue lors de la génération de votre horoscope. Veuillez réessayer plus tard."
     }
 }
 
@@ -219,11 +227,38 @@ async def birth_date_received(message: types.Message, state: FSMContext):
         # await state.clear()
         
         # Log the registration (in production, save to database)
-        logging.info(f"User {message.from_user.id} registered: Language={lang_code}, City={city}, Birth Date={date_text}")
+        # logging.info(f"User {message.from_user.id} registered: Language={lang_code}, City={city}, Birth Date={date_text}")
+        # 1. Inform the user you are working on it
+        await message.answer(get_message(lang_code, "generating"))
         
+        # 2. Call the external AI module
+        horoscope_text = await generate_horoscope(
+            language=lang_code,
+            city=city,
+            birth_date=date_text
+        )
+
+        # 3. Handle the response from the AI module
+        if horoscope_text:
+            # Use the helper to send the potentially long response
+            await send_long_message(message, horoscope_text)
+        else:
+            # The AI module returned None, indicating an error
+            await message.answer(get_message(lang_code, "generation_failed"))
+
+        # Log the successful interaction
+        logging.info(f"Horoscope generated for user {message.from_user.id}")
+
     except ValueError:
         # Invalid date format
         await message.answer(get_message(lang_code, "invalid_date"))
+        return
+    except Exception as e:
+        logging.error(f"An unexpected error occurred in birth_date_received: {e}")
+        await message.answer(get_message(lang_code, "generation_failed"))
+    finally:
+        # End the conversation regardless of success or failure
+        await state.clear()
 
 @dp.message()
 async def handle_unexpected_message(message: types.Message, state: FSMContext):
