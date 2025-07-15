@@ -23,6 +23,7 @@ services:
       - woodentoys
       - n8n
       - n8new
+      - artin-chatbot
     networks:
       - my_network
 
@@ -80,6 +81,15 @@ services:
     networks:
       - my_network
   
+  horoscope-telegram-bot:
+    build: ./horoscope-telegram-bot
+    container_name: horoscope-telegram_bot
+    restart: unless-stopped
+    env_file:
+      - ./horoscope-telegram-bot/bot/.env
+    networks:
+      - my_network
+
   n8new:
     image: docker.n8n.io/n8nio/n8n
     container_name: n8new
@@ -94,6 +104,15 @@ services:
       - WEBHOOK_URL=https://n8new.artindevmarket.com/
     volumes:
       - n8new_data:/home/node/.n8n
+    networks:
+      - my_network
+      
+  artin-chatbot:
+    build: ./artin-chatbot
+    container_name: artin-chatbot
+    restart: unless-stopped
+    env_file:
+      - ./artin-chatbot/.env
     networks:
       - my_network
 

@@ -1,0 +1,5 @@
+{
+  "name": "Vedic Astrology Generator",
+  "description": "An application that generates a personalized Vedic astrology report based on your birth date and preferred language. It uses Gemini to create detailed interpretations of personality, life path, career, love, and health.",
+  "requestFramePermissions": []
+}
