@@ -8,6 +8,7 @@ from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from horoscope_generator import generate_horoscope
@@ -102,22 +103,12 @@ def get_message(lang_code: str, message_key: str) -> str:
     """Get message in specified language, fallback to English if not found"""
     return MESSAGES.get(lang_code, MESSAGES["en"]).get(message_key, MESSAGES["en"][message_key])
 
-def create_language_keyboard() -> InlineKeyboardMarkup:
-    """Create inline keyboard with language options"""
-    builder = InlineKeyboardBuilder()
-    
-    # Add language buttons in rows of 2
-    for i in range(0, len(LANGUAGES), 2):
-        lang_codes = list(LANGUAGES.keys())[i:i+2]
-        row_buttons = []
-        for code in lang_codes:
-            row_buttons.append(InlineKeyboardButton(
-                text=LANGUAGES[code],
-                callback_data=f"lang_{code}"
-            ))
-        builder.row(*row_buttons)
-    
-    return builder.as_markup()
+def create_language_keyboard() -> ReplyKeyboardMarkup:
+    keyboard = [
+        [KeyboardButton(text=LANGUAGES[code])] for code in LANGUAGES
+    ]
+    return ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True, one_time_keyboard=True)
+
 # --- NEW HELPER FUNCTION TO SEND LONG MESSAGES ---
 async def send_long_message(message: types.Message, text: str):
     """Splits and sends a long message."""
@@ -148,29 +139,17 @@ async def send_long_message(message: types.Message, text: str):
 
 @dp.message(CommandStart())
 async def start_command(message: types.Message, state: FSMContext):
-    """Handle /start command"""
     keyboard = create_language_keyboard()
-    await message.answer(
-        "👋 Welcome! Please select your preferred language:",
-        reply_markup=keyboard
-    )
+    await message.answer("\U0001F44B Welcome! Please select your preferred language:", reply_markup=keyboard)
     await state.set_state(UserRegistration.waiting_for_language)
 
-@dp.callback_query(F.data.startswith("lang_"))
-async def language_selected(callback: types.CallbackQuery, state: FSMContext):
-    """Handle language selection"""
-    lang_code = callback.data.split("_")[1]
-    
-    # Save selected language to state
+@dp.message(UserRegistration.waiting_for_language)
+async def language_selected(message: types.Message, state: FSMContext):
+    lang_code = next((code for code, label in LANGUAGES.items() if label == message.text), "en")
     await state.update_data(language=lang_code)
-    
     # Get localized message
     message_text = get_message(lang_code, "language_selected")
-    
-    await callback.message.edit_text(message_text)
-    await callback.answer()
-    
-    # Move to next state
+    await message.answer(f"{message_text}", reply_markup=types.ReplyKeyboardRemove())
     await state.set_state(UserRegistration.waiting_for_city)
 
 @dp.message(UserRegistration.waiting_for_city)
@@ -219,16 +198,6 @@ async def birth_date_received(message: types.Message, state: FSMContext):
         city = data.get("city", "Unknown") # Get city from state
         language_name = LANGUAGES.get(lang_code, "English")
         
-        # Send completion message
-        # completion_message = get_message(lang_code, "registration_complete").format(city, date_text)
-        # await message.answer(completion_message)
-        
-        # # Clear state
-        # await state.clear()
-        
-        # Log the registration (in production, save to database)
-        # logging.info(f"User {message.from_user.id} registered: Language={lang_code}, City={city}, Birth Date={date_text}")
-        # 1. Inform the user you are working on it
         await message.answer(get_message(lang_code, "generating"))
         
         # 2. Call the external AI module
