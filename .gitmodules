@@ -1,3 +1,6 @@
 [submodule "artin-chatbot"]
 	path = artin-chatbot
 	url = https://github.com/aliyousefzadeh/artin-chatbot.git
+[submodule "ai-chatbot"]
+	path = ai-chatbot
+	url = git@github.com:aliyousefzadeh/ai-chat-test.git
