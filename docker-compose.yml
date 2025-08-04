@@ -120,8 +120,8 @@ services:
     build:
       context: ./ai-chatbot
       args:
-        - VITE_GEMINI_API_KEY: ${VITE_GEMINI_API_KEY}
-        - VITE_OPENAI_API_KEY: ${VITE_OPENAI_API_KEY}
+        - VITE_GEMINI_API_KEY=${VITE_GEMINI_API_KEY}
+        - VITE_OPENAI_API_KEY=${VITE_OPENAI_API_KEY}
     container_name: ai-chatbot
     restart: unless-stopped
     networks:
