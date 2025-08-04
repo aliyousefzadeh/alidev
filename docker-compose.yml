@@ -121,7 +121,7 @@ services:
     container_name: ai-chatbot
     restart: unless-stopped
     env_file:
-      - ./ai-chatbot/.env
+      - ./ai-chatbot/.env.local
     networks:
       - my_network
 
