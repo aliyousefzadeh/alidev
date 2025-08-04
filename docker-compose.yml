@@ -24,6 +24,7 @@ services:
       - n8n
       - n8new
       - artin-chatbot
+      - ai-chatbot
     networks:
       - my_network
 
@@ -108,11 +109,19 @@ services:
       - my_network
       
   artin-chatbot:
+    build: ./artin-chatbot
+    container_name: artin-chatbot
+    restart: unless-stopped
+    env_file:
+      - ./artin-chatbot/.env
+    networks:
+      - my_network
+  ai-chatbot:
     build: ./ai-chatbot
     container_name: ai-chatbot
     restart: unless-stopped
     env_file:
-      - ./ai-chatbot/.env
+      - ./ai-chatbot/.env.local
     networks:
       - my_network
 
