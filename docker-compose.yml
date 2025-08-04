@@ -124,8 +124,6 @@ services:
         - VITE_OPENAI_API_KEY: ${VITE_OPENAI_API_KEY}
     container_name: ai-chatbot
     restart: unless-stopped
-    env_file:
-      - ./ai-chatbot/.env.local
     networks:
       - my_network
 
