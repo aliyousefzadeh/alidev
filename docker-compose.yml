@@ -120,10 +120,8 @@ services:
     build: ./ai-chatbot
     container_name: ai-chatbot
     restart: unless-stopped
-    ports:
-      - 3000:3001
     env_file:
-      - ./ai-chatbot/.env.local
+      - ./ai-chatbot/.env
     networks:
       - my_network
 
